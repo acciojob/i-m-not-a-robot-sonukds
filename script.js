@@ -1,4 +1,3 @@
-//your JS code here. If required.
 // Image sources (replace with actual API or image URLs)
 const imageSources = [
     'https://via.placeholder.com/100?text=1',
@@ -34,13 +33,14 @@ function initGame() {
         const img = document.createElement('img');
         img.src = src;
         img.className = `img${imageSources.indexOf(src) + 1}`;
+        img.setAttribute('data-ns-test', `img${imageSources.indexOf(src) + 1}`);
         img.onclick = () => selectImage(index, src);
         imagesContainer.appendChild(img);
     });
 }
 
 function selectImage(index, src) {
-    if (selectedImages.length < 2 && !selectedImages.includes(index)) {
+    if (selectedImages.length < 2 && !selectedImages.some(img => img.index === index)) {
         selectedImages.push({ index, src });
         document.getElementById('reset').style.display = 'block';
 
